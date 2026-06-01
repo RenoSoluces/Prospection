@@ -1,0 +1,1832 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RenoSoluces — Fiche Prospect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #1D9E75;
+    --green-dark: #0F6E56;
+    --green-light: #E1F5EE;
+    --green-mid: #9FE1CB;
+    --text: #111827;
+    --text-secondary: #6B7280;
+    --text-tertiary: #9CA3AF;
+    --bg: #F8FAF9;
+    --surface: #FFFFFF;
+    --border: #E5E7EB;
+    --border-focus: #1D9E75;
+    --radius: 10px;
+    --radius-sm: 6px;
+    --radius-lg: 16px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  /* ---- LAYOUT ---- */
+  .page-wrap {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ---- LOGIN ---- */
+  .login-page {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: var(--bg);
+  }
+
+  .login-card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-md);
+    padding: 2.5rem 2rem;
+    width: 100%;
+    max-width: 400px;
+    animation: fadeUp 0.4s ease both;
+  }
+
+  .brand {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .brand-icon {
+    width: 56px; height: 56px;
+    background: var(--green);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1rem;
+  }
+
+  .brand-icon svg { width: 28px; height: 28px; fill: white; }
+
+  .brand-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--text);
+    letter-spacing: -0.3px;
+  }
+
+  .brand-name span { color: var(--green); }
+
+  .brand-sub {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+
+  /* ---- FORM ELEMENTS ---- */
+  .field {
+    margin-bottom: 1rem;
+  }
+
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 5px;
+  }
+
+  label.required::after {
+    content: ' *';
+    color: #EF4444;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="tel"],
+  input[type="number"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: border-color 0.15s, box-shadow 0.15s;
+    outline: none;
+    appearance: none;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px rgba(29,158,117,0.12);
+  }
+
+  input::placeholder, textarea::placeholder { color: var(--text-tertiary); }
+
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 36px;
+    cursor: pointer;
+  }
+
+  textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0 12px; }
+  .col-2 { grid-column: span 2; }
+
+  /* ---- BUTTONS ---- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    border-radius: var(--radius);
+    border: none;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+
+  .btn-primary {
+    background: var(--green);
+    color: white;
+  }
+  .btn-primary:hover { background: var(--green-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(29,158,117,0.3); }
+  .btn-primary:active { transform: translateY(0); }
+  .btn-primary:disabled { background: var(--border); color: var(--text-tertiary); transform: none; box-shadow: none; cursor: not-allowed; }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover { background: var(--bg); color: var(--text); }
+
+  .btn-full { width: 100%; }
+  .btn-icon { width: 38px; height: 38px; padding: 0; border-radius: var(--radius); }
+
+  .btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+  /* ---- NAV BAR ---- */
+  .topbar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .topbar-logo {
+    width: 34px; height: 34px;
+    background: var(--green);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .topbar-logo svg { width: 18px; height: 18px; fill: white; }
+
+  .topbar-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+    color: var(--text);
+  }
+
+  .topbar-title span { color: var(--green); }
+
+  .topbar-sep {
+    width: 1px; height: 20px;
+    background: var(--border);
+  }
+
+  .topbar-page {
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+
+  .topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .user-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 12px 5px 5px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    font-size: 13px;
+  }
+
+  .user-avatar {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--green);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* ---- MAIN CONTENT ---- */
+  .main-content {
+    flex: 1;
+    padding: 2rem;
+    max-width: 760px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* ---- STEPPER ---- */
+  .stepper {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 2rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+
+  .step-item {
+    flex: 1;
+    padding: 14px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-right: 1px solid var(--border);
+    position: relative;
+  }
+
+  .step-item:last-child { border-right: none; }
+
+  .step-num {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    background: var(--bg);
+    color: var(--text-tertiary);
+    border: 1.5px solid var(--border);
+    transition: all 0.2s;
+  }
+
+  .step-label {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .step-item.active .step-num {
+    background: var(--green);
+    color: white;
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(29,158,117,0.15);
+  }
+
+  .step-item.active .step-label { color: var(--green); font-weight: 600; }
+
+  .step-item.done .step-num {
+    background: var(--green-light);
+    color: var(--green-dark);
+    border-color: var(--green-mid);
+  }
+  .step-item.done .step-label { color: var(--green-dark); }
+
+  /* ---- FORM CARD ---- */
+  .form-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    animation: fadeUp 0.3s ease both;
+  }
+
+  .form-card-header {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .form-card-icon {
+    width: 36px; height: 36px;
+    background: var(--green-light);
+    border-radius: var(--radius-sm);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .form-card-icon svg { width: 18px; height: 18px; stroke: var(--green); fill: none; }
+
+  .form-card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .form-card-sub {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 1px;
+  }
+
+  .form-card-body { padding: 1.5rem; }
+
+  /* ---- CIVILITE ---- */
+  .civilite-group {
+    display: flex;
+    gap: 8px;
+    margin-top: 5px;
+  }
+
+  .civilite-btn {
+    flex: 1;
+    padding: 8px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    text-align: center;
+    background: var(--surface);
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .civilite-btn:hover { border-color: var(--green); color: var(--green); }
+  .civilite-btn.selected { background: var(--green); color: white; border-color: var(--green); }
+
+  /* ---- TRANCHE BADGE ---- */
+  .tranche-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 500;
+    margin-top: 8px;
+  }
+
+  .tranche-badge svg { width: 14px; height: 14px; flex-shrink: 0; }
+  .t-bleu { background: #EFF6FF; color: #1D4ED8; }
+  .t-jaune { background: #FFFBEB; color: #92400E; }
+  .t-violet { background: #F5F3FF; color: #5B21B6; }
+  .t-rose { background: #FFF1F2; color: #BE123C; }
+
+  /* ---- CHANTIER SELECTOR ---- */
+  .chantier-section { margin-bottom: 1.25rem; }
+
+  .chantier-section-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .chantier-section-title svg { width: 14px; height: 14px; stroke: var(--text-tertiary); fill: none; }
+
+  .chantier-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+
+  .chantier-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+
+  .chantier-pill svg { width: 14px; height: 14px; stroke: currentColor; fill: none; flex-shrink: 0; }
+
+  .chantier-pill:hover { border-color: var(--green); color: var(--green); background: var(--green-light); }
+
+  .chantier-pill.selected {
+    background: var(--green);
+    color: white;
+    border-color: var(--green);
+  }
+
+  /* ---- AMOUNT FIELD ---- */
+  .amount-wrap {
+    position: relative;
+  }
+
+  .amount-wrap input { padding-right: 32px; }
+
+  .amount-symbol {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--text-tertiary);
+    pointer-events: none;
+  }
+
+  /* ---- SECTION DIVIDER ---- */
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 1.25rem 0;
+  }
+
+  /* ---- NAV BUTTONS ---- */
+  .form-nav {
+    display: flex;
+    gap: 10px;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ---- SUMMARY ---- */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .summary-block {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+  }
+
+  .summary-block-full {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    margin-bottom: 10px;
+  }
+
+  .summary-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 3px;
+  }
+
+  .summary-value {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .summary-section-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin: 14px 0 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .summary-section-title svg { width: 14px; height: 14px; stroke: var(--green); fill: none; }
+
+  .tag-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    background: var(--green-light);
+    color: var(--green-dark);
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 99px;
+    margin: 2px;
+  }
+
+  /* ---- SUCCESS ---- */
+  .success-wrap {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    animation: fadeUp 0.4s ease both;
+  }
+
+  .success-icon {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: var(--green-light);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.25rem;
+    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+  }
+
+  .success-icon svg { width: 36px; height: 36px; stroke: var(--green); fill: none; }
+
+  .success-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .success-sub {
+    font-size: 14px;
+    color: var(--text-secondary);
+    max-width: 380px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+  }
+
+  .success-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* ---- ERROR MSG ---- */
+  .error-msg {
+    font-size: 12px;
+    color: #EF4444;
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .error-msg svg { width: 12px; height: 12px; stroke: currentColor; fill: none; flex-shrink: 0; }
+
+  /* ---- LOADING OVERLAY ---- */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(17,24,39,0.35);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+  }
+
+  .overlay-box {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    box-shadow: var(--shadow-md);
+    min-width: 220px;
+  }
+
+  .spinner {
+    width: 40px; height: 40px;
+    border: 3px solid var(--green-light);
+    border-top-color: var(--green);
+    border-radius: 50%;
+    margin: 0 auto 12px;
+    animation: spin 0.8s linear infinite;
+  }
+
+  .overlay-box p {
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+
+  /* ---- PRINT ZONE ---- */
+  #pdf-content {
+    display: none;
+  }
+
+  /* ---- ANIMATIONS ---- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes popIn {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* ---- PRINT STYLES ---- */
+  @media print {
+    body * { visibility: hidden; }
+    #pdf-content, #pdf-content * { visibility: visible; }
+    #pdf-content {
+      display: block !important;
+      position: fixed;
+      inset: 0;
+      background: white;
+      padding: 32px;
+      font-family: 'DM Sans', sans-serif;
+      color: #111827;
+    }
+  }
+
+  /* ---- MOBILE ---- */
+  @media (max-width: 580px) {
+    .main-content { padding: 1rem; }
+    .topbar { padding: 0 1rem; }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .col-2 { grid-column: span 1; }
+    .step-label { display: none; }
+    .summary-grid { grid-template-columns: 1fr; }
+    .success-actions { flex-direction: column; align-items: center; }
+    .form-nav { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+<div class="page-wrap" id="app">
+
+  <!-- ===== LOGIN ===== -->
+  <div id="view-login" class="login-page">
+    <div class="login-card">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="brand-name">Reno<span>Soluces</span></div>
+        <div class="brand-sub">Espace commercial — Fiche prospect</div>
+      </div>
+
+      <div class="field">
+        <label class="required" for="l-email">Adresse email</label>
+        <input type="email" id="l-email" placeholder="prenom@renosoluces.fr" autocomplete="email" />
+      </div>
+      <div class="field">
+        <label class="required" for="l-pwd">Mot de passe</label>
+        <input type="password" id="l-pwd" placeholder="••••••••" autocomplete="current-password" />
+      </div>
+      <button class="btn btn-primary btn-full" id="btn-login">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg>
+        Se connecter
+      </button>
+      <div class="error-msg" id="login-error" style="display:none;margin-top:10px;justify-content:center">
+        <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span id="login-error-text"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== APP ===== -->
+  <div id="view-app" style="display:none; flex-direction:column; min-height:100vh;">
+
+    <!-- Top bar -->
+    <div class="topbar">
+      <div class="topbar-left">
+        <div class="topbar-logo">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="topbar-title">Reno<span>Soluces</span></div>
+        <div class="topbar-sep"></div>
+        <div class="topbar-page">Nouvelle fiche prospect</div>
+      </div>
+      <div class="topbar-right">
+        <div class="user-pill">
+          <div class="user-avatar" id="user-avatar">--</div>
+          <span id="user-name" style="font-size:13px;color:var(--text)"></span>
+        </div>
+        <button class="btn btn-ghost btn-icon" id="btn-logout" title="Déconnexion">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Main -->
+    <div class="main-content">
+
+      <!-- Stepper -->
+      <div class="stepper" id="stepper">
+        <div class="step-item active" data-step="0">
+          <div class="step-num">1</div>
+          <div class="step-label">Prospect</div>
+        </div>
+        <div class="step-item" data-step="1">
+          <div class="step-num">2</div>
+          <div class="step-label">Foyer</div>
+        </div>
+        <div class="step-item" data-step="2">
+          <div class="step-num">3</div>
+          <div class="step-label">Chantier</div>
+        </div>
+        <div class="step-item" data-step="3">
+          <div class="step-num">4</div>
+          <div class="step-label">Dossier</div>
+        </div>
+        <div class="step-item" data-step="4">
+          <div class="step-num">5</div>
+          <div class="step-label">Résumé</div>
+        </div>
+      </div>
+
+      <!-- ===== STEP 0 — Infos prospect ===== -->
+      <div id="step-0" class="form-card">
+        <div class="form-card-header">
+          <div class="form-card-icon">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div>
+            <div class="form-card-title">Informations du prospect</div>
+            <div class="form-card-sub">Identité, coordonnées et adresse</div>
+          </div>
+        </div>
+        <div class="form-card-body">
+          <div class="field">
+            <label>Civilité</label>
+            <div class="civilite-group">
+              <button class="civilite-btn selected" data-val="M.">M.</button>
+              <button class="civilite-btn" data-val="Mme">Mme</button>
+              <button class="civilite-btn" data-val="M. et Mme">M. et Mme</button>
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="field">
+              <label class="required" for="f-nom">Nom</label>
+              <input type="text" id="f-nom" placeholder="DUPONT" />
+            </div>
+            <div class="field">
+              <label class="required" for="f-prenom">Prénom</label>
+              <input type="text" id="f-prenom" placeholder="Jean" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-adresse">Adresse</label>
+            <input type="text" id="f-adresse" placeholder="12 rue de la Paix" />
+          </div>
+          <div class="grid-3">
+            <div class="field">
+              <label for="f-cp">Code postal</label>
+              <input type="text" id="f-cp" placeholder="75000" maxlength="5" />
+            </div>
+            <div class="field col-2">
+              <label for="f-ville">Ville</label>
+              <input type="text" id="f-ville" placeholder="Paris" />
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="field">
+              <label for="f-tel">Téléphone</label>
+              <input type="tel" id="f-tel" placeholder="06 00 00 00 00" />
+            </div>
+            <div class="field">
+              <label for="f-email">Email</label>
+              <input type="email" id="f-email" placeholder="jean@exemple.fr" />
+            </div>
+          </div>
+
+          <div class="form-nav">
+            <button class="btn btn-primary" style="flex:1" onclick="goStep(1)">
+              Suivant — Situation du foyer
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== STEP 1 — Foyer ===== -->
+      <div id="step-1" class="form-card" style="display:none">
+        <div class="form-card-header">
+          <div class="form-card-icon">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+          </div>
+          <div>
+            <div class="form-card-title">Situation du foyer</div>
+            <div class="form-card-sub">Revenus, logement et composition</div>
+          </div>
+        </div>
+        <div class="form-card-body">
+          <div class="grid-2">
+            <div class="field">
+              <label for="f-revenu">Revenu Fiscal de Référence</label>
+              <div class="amount-wrap">
+                <input type="number" id="f-revenu" placeholder="0" oninput="updateTranche()" />
+                <span class="amount-symbol">€</span>
+              </div>
+              <div id="tranche-display"></div>
+            </div>
+            <div class="field">
+              <label for="f-personnes">Personnes dans le foyer</label>
+              <select id="f-personnes" onchange="updateTranche()">
+                <option value="">Sélectionner</option>
+                <option>1</option><option>2</option><option>3</option>
+                <option>4</option><option>5</option><option value="6">6 et +</option>
+              </select>
+            </div>
+          </div>
+
+          <hr class="section-divider">
+
+          <div class="grid-2">
+            <div class="field">
+              <label for="f-type-logement">Type de logement</label>
+              <select id="f-type-logement">
+                <option value="">Sélectionner</option>
+                <option value="maison">Maison individuelle</option>
+                <option value="appartement">Appartement</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-chauffage">Chauffage actuel</label>
+              <select id="f-chauffage">
+                <option value="">Sélectionner</option>
+                <option>Gaz</option><option>Fioul</option>
+                <option>Électrique</option><option>Bois</option><option>Autre</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-surface">Surface habitable (m²)</label>
+              <input type="number" id="f-surface" placeholder="100" />
+            </div>
+            <div class="field">
+              <label for="f-annee">Année de construction</label>
+              <input type="number" id="f-annee" placeholder="1980" min="1800" max="2024" />
+            </div>
+          </div>
+
+          <div class="form-nav">
+            <button class="btn btn-ghost" onclick="goStep(0)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              Retour
+            </button>
+            <button class="btn btn-primary" style="flex:1" onclick="goStep(2)">
+              Suivant — Type de chantier
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== STEP 2 — Chantier ===== -->
+      <div id="step-2" class="form-card" style="display:none">
+        <div class="form-card-header">
+          <div class="form-card-icon">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <div>
+            <div class="form-card-title">Type de chantier</div>
+            <div class="form-card-sub">Sélectionnez un ou plusieurs travaux</div>
+          </div>
+        </div>
+        <div class="form-card-body">
+
+          <div class="chantier-section">
+            <div class="chantier-section-title">
+              <svg viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              Isolation
+            </div>
+            <div class="chantier-pills">
+              <button class="chantier-pill" data-prod="Isolation extérieure" data-famille="Isolation" data-cat="isolation_exterieure" onclick="toggleChantier(this)">
+                <svg viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M2 9h20M2 15h20"/></svg>
+                Isolation extérieure
+              </button>
+              <button class="chantier-pill" data-prod="Isolation combles" data-famille="Isolation" data-cat="isolation_combles" onclick="toggleChantier(this)">
+                <svg viewBox="0 0 24 24" stroke-width="2"><path d="M3 9l9-7 9 7"/><path d="M9 22V12h6v10"/></svg>
+                Isolation combles
+              </button>
+            </div>
+          </div>
+
+          <div class="chantier-section">
+            <div class="chantier-section-title">
+              <svg viewBox="0 0 24 24" stroke-width="2"><path d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2m15.73-8.27A2.5 2.5 0 1119.5 12H2"/></svg>
+              Système de chauffage
+            </div>
+            <div class="chantier-pills">
+              <button class="chantier-pill" data-prod="Pompe à chaleur Air Eau" data-famille="Chauffage" data-cat="pac_air_eau" onclick="toggleChantier(this)">
+                <svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 2a5 5 0 00-5 5v3H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2v-9a2 2 0 00-2-2h-2V7a5 5 0 00-5-5z"/></svg>
+                PAC Air Eau
+              </button>
+              <button class="chantier-pill" data-prod="Pompe à chaleur Air Air" data-famille="Chauffage" data-cat="pac_air_air" onclick="toggleChantier(this)">
+                <svg viewBox="0 0 24 24" stroke-width="2"><path d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2m15.73-8.27A2.5 2.5 0 1119.5 12H2"/></svg>
+                PAC Air Air
+              </button>
+            </div>
+          </div>
+
+          <div class="chantier-section">
+            <div class="chantier-section-title">
+              <svg viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 2l-4 5-4-5"/></svg>
+              Production électricité
+            </div>
+            <div class="chantier-pills">
+              <button class="chantier-pill" data-prod="Panneaux Photovoltaïques" data-famille="Photovoltaique" data-cat="photovoltaique" onclick="toggleChantier(this)">
+                <svg viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M12 7V3M12 21v-4M7 12H2M22 12h-5"/></svg>
+                Panneaux Photovoltaïques
+              </button>
+              <button class="chantier-pill" data-prod="Batterie de stockage" data-famille="Photovoltaique" data-cat="batterie" onclick="toggleChantier(this)">
+                <svg viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="7" width="16" height="10" rx="2"/><path d="M22 11v2M7 11v2M12 11v2"/></svg>
+                Batterie de stockage
+              </button>
+            </div>
+          </div>
+
+          <div class="chantier-section">
+            <div class="chantier-section-title">
+              <svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+              Production d'eau chaude
+            </div>
+            <div class="chantier-pills">
+              <button class="chantier-pill" data-prod="Ballon Solaire" data-famille="Eau Chaude" data-cat="ballon_solaire" onclick="toggleChantier(this)">
+                <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                Ballon Solaire
+              </button>
+              <button class="chantier-pill" data-prod="Ballon Thermodynamique" data-famille="Eau Chaude" data-cat="ballon_thermo" onclick="toggleChantier(this)">
+                <svg viewBox="0 0 24 24" stroke-width="2"><path d="M14 14.76V3.5a2.5 2.5 0 00-5 0v11.26a4.5 4.5 0 105 0z"/></svg>
+                Ballon Thermodynamique
+              </button>
+              <button class="chantier-pill" data-prod="Système Solaire Combiné" data-famille="Eau Chaude" data-cat="ssc" onclick="toggleChantier(this)">
+                <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M4 12a8 8 0 018-8M12 20a8 8 0 008-8"/></svg>
+                Système Solaire Combiné
+              </button>
+            </div>
+          </div>
+
+          <div class="chantier-section">
+            <div class="chantier-section-title">
+              <svg viewBox="0 0 24 24" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              CEE
+            </div>
+            <div class="chantier-pills">
+              <button class="chantier-pill" data-prod="Bar TH 174" data-famille="CEE" data-cat="bar_th_174" onclick="toggleChantier(this)">
+                <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+                Bar TH 174
+              </button>
+            </div>
+          </div>
+
+          <div class="form-nav">
+            <button class="btn btn-ghost" onclick="goStep(1)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              Retour
+            </button>
+            <button class="btn btn-primary" style="flex:1" onclick="goStep(3)">
+              Suivant — Dossier
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== STEP 3 — Dossier ===== -->
+      <div id="step-3" class="form-card" style="display:none">
+        <div class="form-card-header">
+          <div class="form-card-icon">
+            <svg viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+          </div>
+          <div>
+            <div class="form-card-title">Dossier commercial</div>
+            <div class="form-card-sub">Commercial, installateur et éléments financiers</div>
+          </div>
+        </div>
+        <div class="form-card-body">
+          <div class="grid-2">
+            <div class="field">
+              <label for="f-commercial">Commercial / Apporteur</label>
+              <select id="f-commercial"><option value="">Chargement...</option></select>
+            </div>
+            <div class="field">
+              <label for="f-installateur">Partenaire installateur</label>
+              <select id="f-installateur"><option value="">Aucun</option></select>
+            </div>
+          </div>
+          <hr class="section-divider">
+          <div class="grid-2">
+            <div class="field">
+              <label for="f-devis">Montant devis (€ TTC)</label>
+              <div class="amount-wrap">
+                <input type="number" id="f-devis" placeholder="0" min="0" />
+                <span class="amount-symbol">€</span>
+              </div>
+            </div>
+            <div class="field">
+              <label for="f-facture">Montant facture (€ TTC)</label>
+              <div class="amount-wrap">
+                <input type="number" id="f-facture" placeholder="0" min="0" />
+                <span class="amount-symbol">€</span>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-notes">Notes & observations</label>
+            <textarea id="f-notes" placeholder="Observations, contexte du rendez-vous, particularités du logement..."></textarea>
+          </div>
+
+          <div class="form-nav">
+            <button class="btn btn-ghost" onclick="goStep(2)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              Retour
+            </button>
+            <button class="btn btn-primary" style="flex:1" onclick="goStep(4)">
+              Vérifier le résumé
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== STEP 4 — Résumé ===== -->
+      <div id="step-4" class="form-card" style="display:none">
+        <div class="form-card-header">
+          <div class="form-card-icon">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+          </div>
+          <div>
+            <div class="form-card-title">Récapitulatif</div>
+            <div class="form-card-sub">Vérifiez les informations avant d'enregistrer</div>
+          </div>
+        </div>
+        <div class="form-card-body">
+          <div id="summary-content"></div>
+
+          <div class="form-nav">
+            <button class="btn btn-ghost" onclick="goStep(3)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              Modifier
+            </button>
+            <button class="btn btn-primary" style="flex:1" id="btn-submit" onclick="submitFiche()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              Enregistrer et envoyer
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== SUCCESS ===== -->
+      <div id="step-success" class="form-card" style="display:none">
+        <div class="form-card-body">
+          <div class="success-wrap">
+            <div class="success-icon">
+              <svg viewBox="0 0 24 24" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div class="success-title">Fiche enregistrée !</div>
+            <div class="success-sub">Le prospect a été créé dans le CRM avec ses opportunités. Un email récapitulatif a été envoyé à <strong>renosoluces@gmail.com</strong></div>
+            <div class="success-actions">
+              <button class="btn btn-ghost" onclick="printFiche()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                Imprimer la fiche PDF
+              </button>
+              <button class="btn btn-primary" onclick="newFiche()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Nouvelle fiche
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== OVERLAY CHARGEMENT ===== -->
+  <div class="overlay" id="overlay" style="display:none">
+    <div class="overlay-box">
+      <div class="spinner"></div>
+      <p id="overlay-msg">Enregistrement en cours...</p>
+    </div>
+  </div>
+
+  <!-- ===== ZONE IMPRESSION ===== -->
+  <div id="pdf-content"></div>
+
+</div>
+
+<script>
+// ============================================================
+// CONFIG SUPABASE
+// ============================================================
+const SUPA_URL = 'https://hkkjbabfraagqbspizyyy.supabase.co';
+const SUPA_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhra2piYWJmcmFhZ3Fic3Bpenl5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU4MTQyNDgsImV4cCI6MjA5MTM5MDI0OH0.EPh4Q90pq9cMF2CQttLE-2FiVJ3hSLatUXlpQlSEnVM';
+const MAIL_DEST = 'renosoluces@gmail.com';
+
+// ============================================================
+// STATE
+// ============================================================
+let authToken = SUPA_ANON;
+let currentUser = null;
+let currentProfile = null;
+let currentStep = 0;
+let selectedCivilite = 'M.';
+let selectedChantiers = [];
+let allProfiles = [];
+let allInstallateurs = [];
+let produitMap = {};
+let lastContactId = null;
+
+// ============================================================
+// TRANCHE MPR PLAFONDS (1 à 5+ personnes) [très modeste, modeste, intermédiaire]
+// ============================================================
+const TRANCHE_PLAFONDS = {
+  1: [17173, 22015, 30549],
+  2: [25149, 32197, 44670],
+  3: [30257, 38744, 53745],
+  4: [35241, 45144, 62608],
+  5: [40000, 51244, 71079],
+};
+
+// ============================================================
+// HELPERS SUPABASE
+// ============================================================
+async function supa(path, opts = {}) {
+  const res = await fetch(SUPA_URL + path, {
+    ...opts,
+    headers: {
+      'apikey': SUPA_ANON,
+      'Authorization': 'Bearer ' + authToken,
+      'Content-Type': 'application/json',
+      'Prefer': 'return=representation',
+      ...(opts.headers || {})
+    }
+  });
+  const text = await res.text();
+  const data = text ? JSON.parse(text) : null;
+  if (!res.ok) throw new Error((data && (data.message || data.error_description)) || ('HTTP ' + res.status));
+  return data;
+}
+
+// ============================================================
+// HELPERS UI
+// ============================================================
+function show(id) { const el = document.getElementById(id); if (el) el.style.display = ''; }
+function hide(id) { const el = document.getElementById(id); if (el) el.style.display = 'none'; }
+function val(id) { const el = document.getElementById(id); return el ? el.value.trim() : ''; }
+function setOverlay(visible, msg) {
+  const el = document.getElementById('overlay');
+  el.style.display = visible ? 'flex' : 'none';
+  if (msg) document.getElementById('overlay-msg').textContent = msg;
+}
+function fmtEuro(n) { return n ? parseInt(n).toLocaleString('fr-FR') + '\u202f€' : '—'; }
+function fmtDate() { return new Date().toLocaleDateString('fr-FR'); }
+
+// ============================================================
+// LOGIN
+// ============================================================
+document.getElementById('btn-login').addEventListener('click', doLogin);
+document.getElementById('l-pwd').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+
+async function doLogin() {
+  const email = val('l-email');
+  const pwd = document.getElementById('l-pwd').value;
+  const errEl = document.getElementById('login-error');
+  const errTxt = document.getElementById('login-error-text');
+  errEl.style.display = 'none';
+
+  if (!email || !pwd) {
+    errTxt.textContent = 'Veuillez remplir tous les champs.';
+    errEl.style.display = 'flex';
+    return;
+  }
+
+  setOverlay(true, 'Connexion...');
+  try {
+    const res = await fetch(SUPA_URL + '/auth/v1/token?grant_type=password', {
+      method: 'POST',
+      headers: { 'apikey': SUPA_ANON, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password: pwd })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error_description || data.message || 'Identifiants incorrects');
+    currentUser = data;
+    authToken = data.access_token;
+    await loadApp();
+  } catch(e) {
+    errTxt.textContent = e.message;
+    errEl.style.display = 'flex';
+  } finally {
+    setOverlay(false);
+  }
+}
+
+document.getElementById('btn-logout').addEventListener('click', () => {
+  currentUser = null; authToken = SUPA_ANON; currentProfile = null;
+  hide('view-app');
+  document.getElementById('view-app').style.display = 'none';
+  document.getElementById('view-login').style.display = 'flex';
+});
+
+// ============================================================
+// LOAD APP
+// ============================================================
+async function loadApp() {
+  setOverlay(true, 'Chargement...');
+  try {
+    // Profil connecté
+    const uid = currentUser.user?.id;
+    const profiles = await supa('/rest/v1/profiles?select=id,nom,prenom,role,actif&actif=eq.true&order=nom');
+    allProfiles = profiles || [];
+    currentProfile = allProfiles.find(p => p.id === uid) || allProfiles[0];
+
+    // Topbar user
+    const initiales = ((currentProfile?.prenom || '').charAt(0) + (currentProfile?.nom || '').charAt(0)).toUpperCase();
+    document.getElementById('user-avatar').textContent = initiales || '?';
+    document.getElementById('user-name').textContent = (currentProfile?.prenom || '') + ' ' + (currentProfile?.nom || '');
+
+    // Installateurs
+    const installs = await supa('/rest/v1/installateurs?select=id,raison_sociale&actif=eq.true&order=raison_sociale');
+    allInstallateurs = installs || [];
+
+    // Peupler selects
+    populateCommercialSelect();
+    populateInstallateurSelect();
+
+    // Vérifier / créer produits
+    await ensureProduits();
+
+    // Afficher app
+    setOverlay(false);
+    hide('view-login');
+    document.getElementById('view-app').style.display = 'flex';
+    resetForm();
+  } catch(e) {
+    setOverlay(false);
+    document.getElementById('login-error-text').textContent = 'Erreur de chargement : ' + e.message;
+    document.getElementById('login-error').style.display = 'flex';
+  }
+}
+
+function populateCommercialSelect() {
+  const sel = document.getElementById('f-commercial');
+  sel.innerHTML = '<option value="">Sélectionner</option>';
+  const isAdmin = currentProfile?.role === 'admin';
+  const list = isAdmin ? allProfiles : allProfiles.filter(p => p.id === currentUser?.user?.id);
+  list.forEach(p => {
+    const opt = document.createElement('option');
+    opt.value = p.id;
+    opt.textContent = (p.prenom || '') + ' ' + (p.nom || '') + (p.role === 'admin' ? ' (Admin)' : '');
+    if (!isAdmin) opt.selected = true;
+    sel.appendChild(opt);
+  });
+}
+
+function populateInstallateurSelect() {
+  const sel = document.getElementById('f-installateur');
+  sel.innerHTML = '<option value="">Aucun</option>';
+  allInstallateurs.forEach(i => {
+    const opt = document.createElement('option');
+    opt.value = i.id;
+    opt.textContent = i.raison_sociale;
+    sel.appendChild(opt);
+  });
+}
+
+// ============================================================
+// PRODUITS — auto-seed
+// ============================================================
+const PRODUITS_REF = [
+  { nom: 'Isolation extérieure', famille: 'Isolation', categorie: 'isolation_exterieure' },
+  { nom: 'Isolation combles', famille: 'Isolation', categorie: 'isolation_combles' },
+  { nom: 'Pompe à chaleur Air Eau', famille: 'Chauffage', categorie: 'pac_air_eau' },
+  { nom: 'Pompe à chaleur Air Air', famille: 'Chauffage', categorie: 'pac_air_air' },
+  { nom: 'Panneaux Photovoltaïques', famille: 'Photovoltaique', categorie: 'photovoltaique' },
+  { nom: 'Batterie de stockage', famille: 'Photovoltaique', categorie: 'batterie' },
+  { nom: 'Ballon Solaire', famille: 'Eau Chaude', categorie: 'ballon_solaire' },
+  { nom: 'Ballon Thermodynamique', famille: 'Eau Chaude', categorie: 'ballon_thermo' },
+  { nom: 'Système Solaire Combiné', famille: 'Eau Chaude', categorie: 'ssc' },
+  { nom: 'Bar TH 174', famille: 'CEE', categorie: 'bar_th_174' },
+];
+
+async function ensureProduits() {
+  try {
+    const existing = await supa('/rest/v1/produits?select=id,nom,categorie');
+    (existing || []).forEach(p => {
+      if (p.categorie) produitMap[p.categorie] = p.id;
+      produitMap[p.nom] = p.id;
+    });
+    const missing = PRODUITS_REF.filter(p => !produitMap[p.categorie]);
+    if (missing.length > 0) {
+      const inserted = await supa('/rest/v1/produits', {
+        method: 'POST',
+        body: JSON.stringify(missing.map(p => ({
+          nom: p.nom, famille: p.famille, categorie: p.categorie,
+          actif: true, created_at: new Date().toISOString()
+        })))
+      });
+      (inserted || []).forEach(p => {
+        if (p.categorie) produitMap[p.categorie] = p.id;
+        produitMap[p.nom] = p.id;
+      });
+    }
+  } catch(e) {
+    console.warn('ensureProduits:', e.message);
+  }
+}
+
+// ============================================================
+// STEPPER
+// ============================================================
+function goStep(n) {
+  document.getElementById('step-' + currentStep).style.display = 'none';
+  document.querySelectorAll('.step-item').forEach((el, i) => {
+    el.classList.remove('active', 'done');
+    if (i < n) el.classList.add('done');
+    if (i === n) el.classList.add('active');
+  });
+  currentStep = n;
+  if (n === 4) buildSummary();
+  document.getElementById('step-' + n).style.display = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ============================================================
+// CIVILITE
+// ============================================================
+document.querySelectorAll('.civilite-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.civilite-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    selectedCivilite = btn.dataset.val;
+  });
+});
+
+// ============================================================
+// TRANCHE MPR
+// ============================================================
+function updateTranche() {
+  const rev = parseInt(document.getElementById('f-revenu').value) || 0;
+  const persRaw = document.getElementById('f-personnes').value;
+  const pers = Math.min(parseInt(persRaw) || 1, 5);
+  const el = document.getElementById('tranche-display');
+  if (!rev) { el.innerHTML = ''; window._trancheMPR = null; return; }
+
+  const limits = TRANCHE_PLAFONDS[pers];
+  let tranche, label, cls;
+  if (rev <= limits[0])       { tranche = 'tranche_bleu';   label = 'Très modeste — Bleu';   cls = 't-bleu'; }
+  else if (rev <= limits[1]) { tranche = 'tranche_jaune';  label = 'Modeste — Jaune';        cls = 't-jaune'; }
+  else if (rev <= limits[2]) { tranche = 'tranche_violet'; label = 'Intermédiaire — Violet'; cls = 't-violet'; }
+  else                        { tranche = 'tranche_rose';   label = 'Supérieure — Rose';      cls = 't-rose'; }
+
+  window._trancheMPR = tranche;
+  el.innerHTML = `<span class="tranche-badge ${cls}">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    MaPrimeRénov' : ${label}
+  </span>`;
+}
+
+// ============================================================
+// CHANTIER TOGGLE
+// ============================================================
+function toggleChantier(el) {
+  el.classList.toggle('selected');
+  const prod = el.dataset.prod;
+  if (el.classList.contains('selected')) {
+    if (!selectedChantiers.find(c => c.prod === prod)) {
+      selectedChantiers.push({ prod, cat: el.dataset.cat, famille: el.dataset.famille });
+    }
+  } else {
+    selectedChantiers = selectedChantiers.filter(c => c.prod !== prod);
+  }
+}
+
+// ============================================================
+// SUMMARY
+// ============================================================
+function getComName() {
+  const sel = document.getElementById('f-commercial');
+  return sel.options[sel.selectedIndex]?.text || '—';
+}
+
+function getInstName() {
+  const sel = document.getElementById('f-installateur');
+  return sel.options[sel.selectedIndex]?.text || '—';
+}
+
+function buildSummary() {
+  const nom = val('f-nom');
+  const prenom = val('f-prenom');
+  const tel = val('f-tel');
+  const email = val('f-email');
+  const adresse = val('f-adresse');
+  const cp = val('f-cp');
+  const ville = val('f-ville');
+  const revenu = val('f-revenu');
+  const personnes = val('f-personnes');
+  const surface = val('f-surface');
+  const annee = val('f-annee');
+  const chauffage = val('f-chauffage');
+  const typeLog = val('f-type-logement');
+  const devis = val('f-devis');
+  const facture = val('f-facture');
+  const notes = val('f-notes');
+  const trancheDisplay = document.getElementById('tranche-display').innerHTML;
+
+  const tagsHtml = selectedChantiers.length
+    ? selectedChantiers.map(c => `<span class="tag-pill">${c.prod}</span>`).join('')
+    : '<span style="color:var(--text-tertiary);font-size:13px">Aucun travail sélectionné</span>';
+
+  document.getElementById('summary-content').innerHTML = `
+    <div class="summary-section-title">
+      <svg viewBox="0 0 24 24" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Prospect
+    </div>
+    <div class="summary-grid">
+      <div class="summary-block"><div class="summary-label">Identité</div><div class="summary-value">${selectedCivilite} ${prenom} ${nom || '—'}</div></div>
+      <div class="summary-block"><div class="summary-label">Téléphone</div><div class="summary-value">${tel || '—'}</div></div>
+      <div class="summary-block"><div class="summary-label">Email</div><div class="summary-value">${email || '—'}</div></div>
+      <div class="summary-block"><div class="summary-label">Adresse</div><div class="summary-value">${adresse ? adresse + ', ' : ''}${cp} ${ville}</div></div>
+    </div>
+
+    <div class="summary-section-title">
+      <svg viewBox="0 0 24 24" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+      Foyer
+    </div>
+    <div class="summary-grid">
+      <div class="summary-block"><div class="summary-label">Revenu fiscal</div><div class="summary-value">${revenu ? parseInt(revenu).toLocaleString('fr-FR') + '\u202f€' : '—'}</div></div>
+      <div class="summary-block"><div class="summary-label">Personnes</div><div class="summary-value">${personnes || '—'}</div></div>
+      <div class="summary-block"><div class="summary-label">Type logement</div><div class="summary-value">${typeLog || '—'}</div></div>
+      <div class="summary-block"><div class="summary-label">Surface / Année</div><div class="summary-value">${surface ? surface + ' m²' : '—'} · ${annee || '—'}</div></div>
+      <div class="summary-block"><div class="summary-label">Chauffage actuel</div><div class="summary-value">${chauffage || '—'}</div></div>
+      ${trancheDisplay ? '<div class="summary-block" style="grid-column:span 2"><div class="summary-label">Tranche MPR</div><div>' + trancheDisplay + '</div></div>' : ''}
+    </div>
+
+    <div class="summary-section-title">
+      <svg viewBox="0 0 24 24" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+      Chantier(s)
+    </div>
+    <div class="summary-block-full">${tagsHtml}</div>
+
+    <div class="summary-section-title">
+      <svg viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+      Dossier
+    </div>
+    <div class="summary-grid">
+      <div class="summary-block"><div class="summary-label">Commercial</div><div class="summary-value">${getComName()}</div></div>
+      <div class="summary-block"><div class="summary-label">Installateur</div><div class="summary-value">${getInstName()}</div></div>
+      <div class="summary-block"><div class="summary-label">Devis</div><div class="summary-value">${fmtEuro(devis)}</div></div>
+      <div class="summary-block"><div class="summary-label">Facture</div><div class="summary-value">${fmtEuro(facture)}</div></div>
+    </div>
+    ${notes ? `<div class="summary-block-full"><div class="summary-label">Notes</div><div class="summary-value" style="font-weight:400;font-size:13px;line-height:1.6">${notes}</div></div>` : ''}
+  `;
+}
+
+// ============================================================
+// SUBMIT
+// ============================================================
+async function submitFiche() {
+  const nom = val('f-nom');
+  const prenom = val('f-prenom');
+  if (!nom && !prenom) { alert('Veuillez renseigner au minimum le nom ou prénom du prospect.'); return; }
+
+  const now = new Date().toISOString();
+  const selCom = document.getElementById('f-commercial');
+  const comId = selCom.value || null;
+  const selInst = document.getElementById('f-installateur');
+  const instId = selInst.value || null;
+  const tags = selectedChantiers.map(c => c.prod);
+
+  setOverlay(true, 'Création du prospect dans le CRM...');
+  try {
+    // 1. Créer le contact
+    const contactPayload = {
+      civilite: selectedCivilite,
+      nom: nom.toUpperCase(),
+      prenom: prenom,
+      email: val('f-email') || null,
+      telephone: val('f-tel') || null,
+      adresse_rue: val('f-adresse') || null,
+      adresse_code_postal: val('f-cp') || null,
+      adresse_ville: val('f-ville') || null,
+      adresse_departement: val('f-cp') ? val('f-cp').substring(0, 2) : null,
+      type_logement: val('f-type-logement') || null,
+      annee_construction: val('f-annee') ? parseInt(val('f-annee')) : null,
+      surface_habitable: val('f-surface') ? parseInt(val('f-surface')) : null,
+      type_chauffage: val('f-chauffage') || null,
+      revenu_fiscal: val('f-revenu') ? parseInt(val('f-revenu')) : null,
+      nombre_personnes: val('f-personnes') ? parseInt(val('f-personnes')) : null,
+      tranche_mpr: window._trancheMPR || null,
+      commercial_id: comId,
+      statut: 'prospect',
+      type: 'particulier',
+      tags: tags.length ? tags : null,
+      notes: val('f-notes') || null,
+      source: 'fiche_prospect',
+      created_at: now,
+      updated_at: now
+    };
+
+    const contacts = await supa('/rest/v1/contacts', {
+      method: 'POST',
+      body: JSON.stringify(contactPayload)
+    });
+    const contact = contacts[0];
+    lastContactId = contact?.id;
+
+    // 2. Créer les opportunités
+    if (selectedChantiers.length > 0 && contact?.id) {
+      setOverlay(true, 'Création des opportunités...');
+      const devis = val('f-devis');
+      const opps = selectedChantiers.map(c => ({
+        contact_id: contact.id,
+        produit_id: produitMap[c.cat] || produitMap[c.prod] || null,
+        etape: 'prospect',
+        commercial_id: comId,
+        installateur_id: instId || null,
+        montant_devis: devis ? parseFloat(devis) : null,
+        date_creation: now,
+        notes: val('f-notes') || null,
+        updated_at: now
+      }));
+      await supa('/rest/v1/opportunites', { method: 'POST', body: JSON.stringify(opps) });
+    }
+
+    // 3. Email
+    setOverlay(true, 'Envoi de l\'email récapitulatif...');
+    sendEmailMaito(contact);
+
+    // 4. Succès
+    setOverlay(false);
+    goStepSuccess();
+
+  } catch(e) {
+    setOverlay(false);
+    alert('Erreur lors de l\'enregistrement :\n' + e.message);
+  }
+}
+
+function goStepSuccess() {
+  document.getElementById('step-4').style.display = 'none';
+  document.querySelectorAll('.step-item').forEach(el => el.classList.remove('active', 'done'));
+  document.getElementById('step-success').style.display = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ============================================================
+// EMAIL
+// ============================================================
+function sendEmailMaito() {
+  const nom = val('f-nom');
+  const prenom = val('f-prenom');
+  const tel = val('f-tel');
+  const email = val('f-email');
+  const adresse = val('f-adresse');
+  const cp = val('f-cp');
+  const ville = val('f-ville');
+  const revenu = val('f-revenu');
+  const personnes = val('f-personnes');
+  const devis = val('f-devis');
+  const facture = val('f-facture');
+  const notes = val('f-notes');
+  const tranche = window._trancheMPR ? window._trancheMPR.replace('_', ' ') : 'Non calculé';
+  const chantiers = selectedChantiers.map(c => '  • ' + c.prod).join('\n') || '  Aucun sélectionné';
+  const date = fmtDate();
+
+  const subject = `[RenoSoluces] Nouveau prospect : ${selectedCivilite} ${prenom} ${nom}`;
+  const body = `Bonjour,
+
+Un nouveau prospect a été enregistré le ${date}.
+
+═══════════════════════════════
+INFORMATIONS PROSPECT
+═══════════════════════════════
+Civilité    : ${selectedCivilite}
+Nom         : ${nom || '—'}
+Prénom      : ${prenom || '—'}
+Téléphone   : ${tel || '—'}
+Email       : ${email || '—'}
+Adresse     : ${adresse || '—'}
+Code postal : ${cp || '—'}
+Ville       : ${ville || '—'}
+
+═══════════════════════════════
+SITUATION DU FOYER
+═══════════════════════════════
+Revenu fiscal de référence : ${revenu ? parseInt(revenu).toLocaleString('fr-FR') + ' €' : '—'}
+Personnes dans le foyer    : ${personnes || '—'}
+Tranche MaPrimeRénov'      : ${tranche}
+Type de logement           : ${val('f-type-logement') || '—'}
+Surface habitable          : ${val('f-surface') ? val('f-surface') + ' m²' : '—'}
+Année de construction      : ${val('f-annee') || '—'}
+Chauffage actuel           : ${val('f-chauffage') || '—'}
+
+═══════════════════════════════
+TYPE DE CHANTIER
+═══════════════════════════════
+${chantiers}
+
+═══════════════════════════════
+DOSSIER COMMERCIAL
+═══════════════════════════════
+Commercial / Apporteur : ${getComName()}
+Partenaire installateur : ${getInstName()}
+Montant devis    : ${devis ? parseInt(devis).toLocaleString('fr-FR') + ' €' : '—'}
+Montant facture  : ${facture ? parseInt(facture).toLocaleString('fr-FR') + ' €' : '—'}
+
+${notes ? '═══════════════════════════════\nNOTES\n═══════════════════════════════\n' + notes + '\n' : ''}
+---
+RenoSoluces — Fiche prospect créée automatiquement le ${date}`;
+
+  window.open('mailto:' + MAIL_DEST + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body));
+}
+
+// ============================================================
+// IMPRESSION PDF
+// ============================================================
+function printFiche() {
+  const nom = val('f-nom');
+  const prenom = val('f-prenom');
+  const tel = val('f-tel');
+  const email = val('f-email');
+  const adresse = val('f-adresse');
+  const cp = val('f-cp');
+  const ville = val('f-ville');
+  const revenu = val('f-revenu');
+  const personnes = val('f-personnes');
+  const surface = val('f-surface');
+  const annee = val('f-annee');
+  const chauffage = val('f-chauffage');
+  const typeLog = val('f-type-logement');
+  const devis = val('f-devis');
+  const facture = val('f-facture');
+  const notes = val('f-notes');
+  const tranche = (window._trancheMPR || '').replace('_', ' ') || '—';
+  const date = fmtDate();
+  const chantiersTags = selectedChantiers.map(c =>
+    `<span style="display:inline-block;padding:3px 10px;background:#E1F5EE;color:#085041;border-radius:99px;font-size:11px;font-weight:600;margin:2px">${c.prod}</span>`
+  ).join(' ') || '—';
+
+  const w = window.open('', '_blank');
+  w.document.write(`<!DOCTYPE html>
+<html lang="fr"><head>
+<meta charset="UTF-8">
+<title>Fiche prospect — ${selectedCivilite} ${prenom} ${nom}</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', Arial, sans-serif; color: #111827; background: white; padding: 32px 40px; font-size: 13px; }
+  .header { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 16px; border-bottom: 2px solid #1D9E75; margin-bottom: 24px; }
+  .brand { font-family: 'DM Serif Display', serif; font-size: 22px; color: #111827; }
+  .brand span { color: #1D9E75; }
+  .header-right { text-align: right; font-size: 11px; color: #6B7280; line-height: 1.6; }
+  h2 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #1D9E75; margin: 20px 0 10px; display: flex; align-items: center; gap: 6px; }
+  h2::after { content: ''; flex: 1; height: 1px; background: #E5E7EB; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px; margin-bottom: 4px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px 16px; margin-bottom: 4px; }
+  .field { padding: 8px 10px; background: #F9FAFB; border-radius: 6px; border: 1px solid #F3F4F6; }
+  .f-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #9CA3AF; margin-bottom: 2px; }
+  .f-value { font-size: 13px; font-weight: 500; color: #111827; }
+  .notes-box { padding: 10px 12px; background: #F9FAFB; border-radius: 6px; border: 1px solid #F3F4F6; font-size: 12px; line-height: 1.7; }
+  .footer { margin-top: 32px; padding-top: 12px; border-top: 1px solid #E5E7EB; display: flex; justify-content: space-between; font-size: 10px; color: #9CA3AF; }
+  @media print { @page { margin: 20mm 15mm; } body { padding: 0; } }
+</style>
+</head><body>
+<div class="header">
+  <div>
+    <div class="brand">Reno<span>Soluces</span></div>
+    <div style="font-size:12px;color:#6B7280;margin-top:2px">Fiche de suivi prospect</div>
+  </div>
+  <div class="header-right">
+    Créé le ${date}<br>
+    Par : ${(currentProfile?.prenom || '') + ' ' + (currentProfile?.nom || '')}
+    ${lastContactId ? '<br>Réf. CRM : #' + lastContactId.substring(0, 8).toUpperCase() : ''}
+  </div>
+</div>
+
+<h2>Informations prospect</h2>
+<div class="grid">
+  <div class="field"><div class="f-label">Civilité & Nom</div><div class="f-value">${selectedCivilite} ${prenom} ${nom}</div></div>
+  <div class="field"><div class="f-label">Téléphone</div><div class="f-value">${tel || '—'}</div></div>
+  <div class="field"><div class="f-label">Email</div><div class="f-value">${email || '—'}</div></div>
+  <div class="field"><div class="f-label">Adresse</div><div class="f-value">${adresse || '—'}</div></div>
+  <div class="field"><div class="f-label">Code postal</div><div class="f-value">${cp || '—'}</div></div>
+  <div class="field"><div class="f-label">Ville</div><div class="f-value">${ville || '—'}</div></div>
+</div>
+
+<h2>Situation du foyer</h2>
+<div class="grid">
+  <div class="field"><div class="f-label">Revenu fiscal de référence</div><div class="f-value">${revenu ? parseInt(revenu).toLocaleString('fr-FR') + ' €' : '—'}</div></div>
+  <div class="field"><div class="f-label">Personnes dans le foyer</div><div class="f-value">${personnes || '—'}</div></div>
+  <div class="field"><div class="f-label">Tranche MaPrimeRénov'</div><div class="f-value">${tranche}</div></div>
+  <div class="field"><div class="f-label">Type de logement</div><div class="f-value">${typeLog || '—'}</div></div>
+  <div class="field"><div class="f-label">Surface habitable</div><div class="f-value">${surface ? surface + ' m²' : '—'}</div></div>
+  <div class="field"><div class="f-label">Année de construction</div><div class="f-value">${annee || '—'}</div></div>
+  <div class="field"><div class="f-label">Chauffage actuel</div><div class="f-value">${chauffage || '—'}</div></div>
+</div>
+
+<h2>Type de chantier</h2>
+<div style="padding:10px 12px;background:#F9FAFB;border-radius:6px;border:1px solid #F3F4F6;min-height:36px">${chantiersTags}</div>
+
+<h2>Dossier commercial</h2>
+<div class="grid">
+  <div class="field"><div class="f-label">Commercial / Apporteur</div><div class="f-value">${getComName()}</div></div>
+  <div class="field"><div class="f-label">Partenaire installateur</div><div class="f-value">${getInstName()}</div></div>
+  <div class="field"><div class="f-label">Montant devis</div><div class="f-value">${devis ? parseInt(devis).toLocaleString('fr-FR') + ' €' : '—'}</div></div>
+  <div class="field"><div class="f-label">Montant facture</div><div class="f-value">${facture ? parseInt(facture).toLocaleString('fr-FR') + ' €' : '—'}</div></div>
+</div>
+
+${notes ? '<h2>Notes & observations</h2><div class="notes-box">' + notes.replace(/\n/g, '<br>') + '</div>' : ''}
+
+<div class="footer">
+  <span>RenoSoluces — Document confidentiel</span>
+  <span>Créé le ${date} · Fiche prospect</span>
+</div>
+<script>window.onload = function() { setTimeout(() => window.print(), 300); };<\/script>
+</body></html>`);
+  w.document.close();
+}
+
+// ============================================================
+// RESET
+// ============================================================
+function resetForm() {
+  // Reset champs
+  ['f-nom','f-prenom','f-adresse','f-cp','f-ville','f-tel','f-email',
+   'f-revenu','f-personnes','f-surface','f-annee','f-notes','f-devis','f-facture'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  ['f-type-logement','f-chauffage'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.selectedIndex = 0;
+  });
+  document.getElementById('tranche-display').innerHTML = '';
+  document.querySelectorAll('.chantier-pill').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('.civilite-btn').forEach((b, i) => b.classList.toggle('selected', i === 0));
+  selectedCivilite = 'M.';
+  selectedChantiers = [];
+  window._trancheMPR = null;
+  lastContactId = null;
+  currentStep = 0;
+
+  document.querySelectorAll('[id^="step-"]').forEach(el => el.style.display = 'none');
+  document.getElementById('step-0').style.display = '';
+  document.querySelectorAll('.step-item').forEach((el, i) => {
+    el.classList.remove('active', 'done');
+    if (i === 0) el.classList.add('active');
+  });
+}
+
+function newFiche() {
+  document.getElementById('step-success').style.display = 'none';
+  resetForm();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
