@@ -1418,10 +1418,10 @@ function updateTranche() {
 
   const limits = TRANCHE_PLAFONDS[pers];
   let tranche, label, cls;
-  if (rev <= limits[0])       { tranche = 'tranche_bleu';   label = 'Très modeste — Bleu';   cls = 't-bleu'; }
-  else if (rev <= limits[1]) { tranche = 'tranche_jaune';  label = 'Modeste — Jaune';        cls = 't-jaune'; }
-  else if (rev <= limits[2]) { tranche = 'tranche_violet'; label = 'Intermédiaire — Violet'; cls = 't-violet'; }
-  else                        { tranche = 'tranche_rose';   label = 'Supérieure — Rose';      cls = 't-rose'; }
+  if (rev <= limits[0])       { tranche = 'tres_modeste';   label = 'Très modeste — Bleu';   cls = 't-bleu'; }
+  else if (rev <= limits[1]) { tranche = 'modeste';         label = 'Modeste — Jaune';        cls = 't-jaune'; }
+  else if (rev <= limits[2]) { tranche = 'intermediaire';   label = 'Intermédiaire — Violet'; cls = 't-violet'; }
+  else                        { tranche = 'superieure';      label = 'Supérieure — Rose';      cls = 't-rose'; }
 
   window._trancheMPR = tranche;
   el.innerHTML = `<span class="tranche-badge ${cls}">
