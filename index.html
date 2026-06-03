@@ -1355,25 +1355,10 @@ const PRODUITS_REF = [
 
 async function ensureProduits() {
   try {
-    const existing = await supa('/rest/v1/produits?select=id,nom,categorie');
+    const existing = await supa('/rest/v1/produits?select=id,nom&actif=eq.true');
     (existing || []).forEach(p => {
-      if (p.categorie) produitMap[p.categorie] = p.id;
       produitMap[p.nom] = p.id;
     });
-    const missing = PRODUITS_REF.filter(p => !produitMap[p.categorie]);
-    if (missing.length > 0) {
-      const inserted = await supa('/rest/v1/produits', {
-        method: 'POST',
-        body: JSON.stringify(missing.map(p => ({
-          nom: p.nom, famille: p.famille, categorie: p.categorie,
-          actif: true, created_at: new Date().toISOString()
-        })))
-      });
-      (inserted || []).forEach(p => {
-        if (p.categorie) produitMap[p.categorie] = p.id;
-        produitMap[p.nom] = p.id;
-      });
-    }
   } catch(e) {
     console.warn('ensureProduits:', e.message);
   }
@@ -1603,7 +1588,7 @@ async function submitFiche() {
       const opps = selectedChantiers.map((c, i) => ({
         reference: 'OPP-' + year + '-' + String(nextNum + i).padStart(3, '0'),
         contact_id: contact.id,
-        produit_id: produitMap[c.cat] || produitMap[c.prod] || null,
+        produit_id: produitMap[c.prod] || null,
         etape: 'prospect',
         commercial_id: comId,
         installateur_id: instId || null,
