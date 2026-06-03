@@ -1589,7 +1589,7 @@ async function submitFiche() {
         reference: 'OPP-' + year + '-' + String(nextNum + i).padStart(3, '0'),
         contact_id: contact.id,
         produit_id: produitMap[c.prod] || null,
-        etape: 'prospect',
+        etape: 'nouveau_lead',
         commercial_id: comId,
         installateur_id: instId || null,
         montant_devis: devis ? parseFloat(devis) : null,
