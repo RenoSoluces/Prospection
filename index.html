@@ -1582,7 +1582,26 @@ async function submitFiche() {
     if (selectedChantiers.length > 0 && contact?.id) {
       setOverlay(true, 'Création des opportunités...');
       const devis = val('f-devis');
-      const opps = selectedChantiers.map(c => ({
+
+      // Récupérer la dernière référence pour incrémenter
+      const year = new Date().getFullYear();
+      let nextNum = 1;
+      try {
+        const lastOpps = await supa('/rest/v1/opportunites?select=reference&reference=like.OPP-' + year + '-*&order=reference.desc&limit=1');
+        if (lastOpps && lastOpps.length > 0 && lastOpps[0].reference) {
+          const lastNum = parseInt(lastOpps[0].reference.split('-')[2]) || 0;
+          nextNum = lastNum + 1;
+        } else {
+          const allOpps = await supa('/rest/v1/opportunites?select=reference&reference=like.OPP-*&order=reference.desc&limit=1');
+          if (allOpps && allOpps.length > 0 && allOpps[0].reference) {
+            const parts = allOpps[0].reference.split('-');
+            if (parseInt(parts[1]) === year) nextNum = parseInt(parts[2]) + 1;
+          }
+        }
+      } catch(e) { console.warn('ref lookup:', e.message); }
+
+      const opps = selectedChantiers.map((c, i) => ({
+        reference: 'OPP-' + year + '-' + String(nextNum + i).padStart(3, '0'),
         contact_id: contact.id,
         produit_id: produitMap[c.cat] || produitMap[c.prod] || null,
         etape: 'prospect',
